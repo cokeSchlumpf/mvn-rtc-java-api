@@ -1,0 +1,6 @@
+utils/rtc-java-api/**
+libs-*/*.jar
+libs-*/doc/**
+repo/com/**
+repo/net/**
+repo/org/**
