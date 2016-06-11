@@ -10,6 +10,8 @@
 # setup-repo.sh [ -h | --help | OPTIONS ]
 #
 # Options:
+#   -d|--dependencies
+#     Public Maven dependencies which sould be used instead of downlaoded ones.
 #   -l|--libs
 #     Optional. Default: ../libs.
 #     The directory containing the RTC jar dependencies.
@@ -26,12 +28,12 @@ set -e
 
 CURRENTDIR=`pwd`
 BASEDIR=$(dirname $0)
+DEPENDENCIES=
 LIBS=
 REPO=
 RTC_VERSION=
-# http-core, commons-logging, commons-codec
 # DEPENDENCIES="org.apache.james:apache-mime4j:0.6 commons-io:commons-io:1.2 org.apache.httpcomponents:httpclient:4.5 org.apache.httpcomponents:httpclient-cache:4.5 org.apache.httpcomponents:httpclient-win:4.5 org.apache.httpcomponents:httpcore:4.4.1 org.apache.httpcomponents:httpcore-ab:4.4.1 org.apache.httpcomponents:httpcore-nio:4.4.1 org.apache.httpcomponents:httpmime:4.5"
-DEPENDENCIES="org.apache.james:apache-mime4j:0.6 commons-io:commons-io:1.2 org.apache.httpcomponents:httpclient:4.1.2 org.apache.httpcomponents:httpcore-nio:4.1.2 org.apache.httpcomponents:httpmime:4.1.2"
+# DEPENDENCIES="org.apache.james:apache-mime4j:0.6 commons-io:commons-io:1.2 org.apache.httpcomponents:httpclient:4.1.2 org.apache.httpcomponents:httpcore-nio:4.1.2 org.apache.httpcomponents:httpmime:4.1.2"
 
 main() {
   cd ${BASEDIR}
@@ -129,6 +131,10 @@ write_pom() {
 }
 
 init_defaults() {
+  if [ -z "${DEPENDENCIES}"]; then
+    >&2 echo "Missing required parameter: -d|--dependencies."
+    show_help_and_exit 1
+  fi;
 	if [ -z "${LIBS}" ]; then
 	  LIBS="../libs"
 	fi;
@@ -145,6 +151,11 @@ read_variables() {
   do
     key="$1"
     case $key in
+      -d|--dependencies)
+        DEPENDENCIES="$2"
+        shift # past argument
+        shift # past argument
+        ;;
       -l|--libs)
         LIBS="$2"
         shift # past argument
@@ -185,6 +196,8 @@ show_help_and_exit() {
   echo "setup-repo.sh [ -h | --help | OPTIONS ]"
   echo ""
   echo "Options:"
+  echo "  -d|--dependencies"
+  echo "    Public Maven dependencies which sould be used instead of downlaoded ones."
   echo "  -l|--libs"
   echo "    Optional. Default: ../libs."
   echo "    The directory containing the RTC jar dependencies."
@@ -195,7 +208,6 @@ show_help_and_exit() {
   echo "    Optional. Default: 6.0.1."
   echo "    The current RTC version - Only needed for produced rtc-java-api pom."
   echo
-  sleep 3
 
   cd ${CURRENTDIR}
   exit $1

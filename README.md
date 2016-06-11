@@ -1,4 +1,4 @@
-# mvn-rtc-java-api - Set up RTC Java Client API for Maven
+# mvn-rtc-java-api - Simple setup RTC Java Client API for Maven
 
 `utils/setup-repo.sh` is a script which simplifies the setup of RTC Java Client API for a Maven project. It works for several RTC versions, it's tested for 5.x.x and 6.x.x.
 
