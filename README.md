@@ -1,6 +1,6 @@
 # mvn-rtc-java-api - Simple setup RTC Java Client API for Maven
 
-`utils/setup-repo.sh` is a script which simplifies the setup of RTC Java Client API for a Maven project. It works for several RTC versions, it's tested for 5.x.x and 6.x.x.
+`setup-repo.sh` is a script which simplifies the setup of RTC Java Client API for a Maven project. It works for several RTC versions, it's tested for 5.x.x and 6.x.x.
 
 ## Step by step guide
 
@@ -29,7 +29,7 @@
 3. Call the `setup-repo.sh` file:
 
   ```bash
-  ./utils/setup-repo.sh \
+  ./setup-repo.sh \
     -l ${LIBS_DIR} \
     -r ${REPO_DIR} \
     -d "${DEPENDENCIES}" \
@@ -81,4 +81,4 @@
 
 * Set up a repository within the project as described by [Charlie Wu](http://charlie.cu.cc/2012/06/how-add-external-libraries-maven/).
 
-`utils/setup-repo.sh` automates the set up of an project repository including all the necessary dependencies of the RTC Client Java API.
+`setup-repo.sh` automates the set up of an project repository including all the necessary dependencies of the RTC Client Java API.
