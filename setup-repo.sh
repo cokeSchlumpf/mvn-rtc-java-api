@@ -131,7 +131,7 @@ write_pom() {
 }
 
 init_defaults() {
-  if [ -z "${DEPENDENCIES}"]; then
+  if [ -z "${DEPENDENCIES}" ]; then
     >&2 echo "Missing required parameter: -d|--dependencies."
     show_help_and_exit 1
   fi;
@@ -181,7 +181,7 @@ read_variables() {
     esac
   done
 
-  if [ `which mvn` == "" ]; then
+  if [[ `which mvn` == "" ]]; then
     echo "No Maven installed. Please install maven first."
     show_help_and_exit 3
   fi;
